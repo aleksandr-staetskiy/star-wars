@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'CardList',
   props: {
@@ -78,6 +80,15 @@ export default {
         'Shopping',
       ],
     };
+  },
+  // computed: {
+  //   ...mapState({ heros: (store) => store.heros.heros }),
+  // },
+  methods: {
+    ...mapActions(['heros/fetchHeros']),
+  },
+  mounted() {
+    this.$store.dispatch('fetchHeros');
   },
 };
 </script>
