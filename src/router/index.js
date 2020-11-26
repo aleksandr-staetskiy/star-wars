@@ -11,7 +11,7 @@ const routes = [
     component: CardList,
   },
   {
-    path: '/about',
+    path: '/about/:id',
     name: 'About',
     component: () => import('../views/About.vue'),
   },

@@ -50,7 +50,7 @@
         class="ml-auto"
         text
         color="teal accent-4"
-        @click="reveal = true"
+        @click="$router.push(`about/${index}`)"
       >
         Learn More
       </v-btn>
@@ -65,6 +65,10 @@ export default {
     character: {
       type: Object,
       default: () => {},
+    },
+    index: {
+      type: Number,
+      default: 1,
     },
   },
   data() {

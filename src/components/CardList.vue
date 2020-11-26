@@ -3,10 +3,13 @@
     <v-row v-if="heroes.heroes ">
       <v-col
         cols="6"
-        v-for="hero in heroes.heroes.results"
+        v-for="(hero, index) in heroes.heroes.results"
         :key="hero.created"
         >
-        <HeroCard :character="hero" />
+        <HeroCard
+          :character="hero"
+          :index="index + 1"
+          />
       </v-col>
     </v-row>
     <v-pagination
