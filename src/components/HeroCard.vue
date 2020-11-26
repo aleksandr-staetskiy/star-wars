@@ -4,7 +4,7 @@
   >
     <v-card-text>
       <p class="display-1 text--primary">
-        dsfbdfbse
+        {{ character.name }}
       </p>
     </v-card-text>
     <v-row >
@@ -14,15 +14,15 @@
             <tbody>
               <tr>
                <td>Gender</td>
-                <td>{{ character }}</td>
+                <td>{{ character.gender }}</td>
               </tr>
               <tr>
                <td>Height</td>
-                <td>{{ character }}</td>
+                <td>{{ character.height }}</td>
               </tr>
               <tr>
                <td>Mass</td>
-                <td>{{ character }}</td>
+                <td>{{ character.mass }}</td>
               </tr>
             </tbody>
           </template>
@@ -59,8 +59,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 export default {
   name: 'CardList',
   props: {
@@ -80,15 +78,6 @@ export default {
         'Shopping',
       ],
     };
-  },
-  // computed: {
-  //   ...mapState({ heros: (store) => store.heros.heros }),
-  // },
-  methods: {
-    ...mapActions(['heros/fetchHeros']),
-  },
-  mounted() {
-    this.$store.dispatch('fetchHeros');
   },
 };
 </script>

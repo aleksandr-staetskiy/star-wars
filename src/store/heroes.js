@@ -2,23 +2,23 @@ import axios from 'axios';
 
 export default {
   state: {
-    heros: null,
+    heroes: null,
     error: null,
   },
   mutations: {
-    SET_HEROS(state, heroList) {
-      state.heros = heroList;
+    SET_HEROES(state, heroList) {
+      state.heroes = heroList;
     },
     SET_ERROR(state, err) {
       state.error = err;
     },
   },
   actions: {
-    async fetchHeros(context) {
+    async fetchHeroes(context) {
       try {
         const { data } = await axios.get('https://swapi.dev/api/people/');
 
-        context.commit('SET_HEROS', data);
+        context.commit('SET_HEROES', data);
       } catch (err) {
         context.commit('SET_ERROR', err);
       }
