@@ -17,15 +17,17 @@
       :length="pagination"
       @input="getHeroPage($event)"
     />
+    <loading-state :isLoading="heroes.isLoading" />
   </v-container>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 import HeroCard from './HeroCard.vue';
+import LoadingState from './LoadingState.vue';
 
 export default {
-  components: { HeroCard },
+  components: { HeroCard, LoadingState },
   name: 'CardList',
 
   data() {
@@ -51,6 +53,7 @@ export default {
     ...mapActions(['heros/fetchHeroes']),
     getHeroPage(page) {
       this.$store.dispatch('fetchHeroes', page);
+      this.$vuetify.goTo(0);
     },
   },
   async created() {
