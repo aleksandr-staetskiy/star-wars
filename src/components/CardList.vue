@@ -61,6 +61,7 @@ export default {
       await this.$store.dispatch('fetchHeroes', this.$route.query.page);
     } else {
       await this.$store.dispatch('fetchHeroes');
+      this.$router.push({ query: { page: this.currPage } });
     }
   },
 };
