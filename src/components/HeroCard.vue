@@ -30,18 +30,29 @@
       </v-col>
       <v-col :cols="4">
         <p>starships</p>
-        <v-chip-group
+        <template v-if="tags">
+          <v-chip-group
+            v-if="tags.length"
             active-class="primary--text"
             column
           >
             <v-chip
               v-for="tag in tags"
               x-small
-              :key="tag"
+              :key="tag.created"
             >
-              {{ tag }}
+              {{ tag.name }}
             </v-chip>
           </v-chip-group>
+          <v-chip
+            v-else
+            x-small
+            color="red"
+            class="ma-2"
+          >
+            I haven't starship (
+          </v-chip>
+        </template>
       </v-col>
     </v-row>
     <v-divider />
@@ -59,6 +70,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'CardList',
   props: {
@@ -73,15 +86,26 @@ export default {
   },
   data() {
     return {
-      tags: [
-        'Work',
-        'Home Improvement',
-        'Vacation',
-        'Food',
-        'Drawers',
-        'Shopping',
-      ],
+      tags: [],
     };
+  },
+  mounted() {
+    this.getHeroStarship();
+  },
+  methods: {
+    async getHeroStarship() {
+      const ships = [];
+      try {
+        this.character.starships.forEach(async (item) => {
+          const { data } = await axios.get(item);
+          ships.push(data);
+        });
+
+        this.tags = ships;
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>

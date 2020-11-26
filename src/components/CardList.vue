@@ -53,11 +53,11 @@ export default {
       this.$store.dispatch('fetchHeroes', page);
     },
   },
-  created() {
+  async created() {
     if (this.$route.query.page) {
-      this.$store.dispatch('fetchHeroes', this.$route.query.page);
+      await this.$store.dispatch('fetchHeroes', this.$route.query.page);
     } else {
-      this.$store.dispatch('fetchHeroes');
+      await this.$store.dispatch('fetchHeroes');
     }
   },
 };

@@ -86,7 +86,7 @@ export default {
     ...mapState(['hero', ['hero']]),
   },
   methods: {
-    ...mapActions(['heros/getHero', 'heros/getHeroFilms']),
+    ...mapActions(['heroes/getHero', 'heroes/getHeroFilms']),
   },
   async created() {
     const { id } = this.$route.params;
