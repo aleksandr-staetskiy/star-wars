@@ -5,12 +5,6 @@ import heroes from './heroes';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
     heroes,
   },

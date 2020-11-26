@@ -14,13 +14,13 @@ export default {
     },
   },
   actions: {
-    async fetchHeroes(context) {
+    async fetchHeroes({ commit }, page = 1) {
       try {
-        const { data } = await axios.get('https://swapi.dev/api/people/');
+        const { data } = await axios.get(`https://swapi.dev/api/people/?page=${page}`);
 
-        context.commit('SET_HEROES', data);
+        commit('SET_HEROES', data);
       } catch (err) {
-        context.commit('SET_ERROR', err);
+        commit('SET_ERROR', err);
       }
     },
   },

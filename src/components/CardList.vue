@@ -9,6 +9,11 @@
         <HeroCard :character="hero" />
       </v-col>
     </v-row>
+    <v-pagination
+      v-model="currPage"
+      :length="pagination"
+      @input="getHeroPage($event)"
+    />
   </v-container>
 </template>
 
@@ -22,16 +27,35 @@ export default {
 
   data() {
     return {
+      currPage: 1,
     };
+  },
+  watch: {
+    currPage(val) {
+      this.$router.push({ query: { page: val } });
+    },
   },
   computed: {
     ...mapState(['heroes', ['heroes']]),
+    pagination() {
+      if (this.heroes.heroes) {
+        return Math.ceil(this.heroes.heroes.count / this.heroes.heroes.results.length);
+      }
+      return 0;
+    },
   },
   methods: {
     ...mapActions(['heros/fetchHeroes']),
+    getHeroPage(page) {
+      this.$store.dispatch('fetchHeroes', page);
+    },
   },
   created() {
-    this.$store.dispatch('fetchHeroes');
+    if (this.$route.query.page) {
+      this.$store.dispatch('fetchHeroes', this.$route.query.page);
+    } else {
+      this.$store.dispatch('fetchHeroes');
+    }
   },
 };
 </script>
